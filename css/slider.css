@@ -4,7 +4,10 @@ html,
 body {
 	margin: 0;
 	height: 0;
+    font-family: Gulim;
+    font-style: normal;
 	font-size: 16px;
+	font-weight: 400
 }
 
 body {
@@ -68,6 +71,7 @@ body {
 	display: table;
 	margin: 1rem auto;
 	height: 1rem;
+	counter-reset: indexSlider;
 }
 
 .slider-navigate {
@@ -78,12 +82,19 @@ body {
 }
 
 .slider-navigate:before {
-	content: '';
-	display: block;
+	counter-increment: indexSlider;
+	content: counter(indexSlider);
+	display: flex;
+	flex-florw: row nowrap;
+	place-content: center;
+	align-items: center;
 	border-radius: 1rem;
 	width: 1rem;
 	height: 1rem;
+	line-height: 1;
+	font-size: 12px;
 	background-color: #a9b4b8;
+	color: #ffffff;
 	transition: all 0.25s;
 }
 
