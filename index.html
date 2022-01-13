@@ -1,41 +1,95 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>AnotherKitchen</title>
-    <style>
-      * {
-        margin: 0;
-        padding: 0;
-      }
+<html>
+<head>
 
-      div {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: min-content;
-        grid-gap: 1rem;
-        padding: 1rem;
-      }
+	<title>AnotherKitchen</title>
 
-      img {
-        display: block;
-        width: 100%;
-      }
-    </style>
-  </head>
-  <body>
-    <div>
-      <img src="01.jpg" />
-      <img src="02.jpg" />
-      <img src="03.jpg" />
-      <img src="04.jpg" />
-      <img src="05.jpg" />
-      <img src="06.jpg" />
-      <img src="07.jpg" />
-      <img src="08.jpg" />
-      <img src="09.jpg" />
-      <img src="10.jpg" />
-    </div>
-  </body>
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+	<link href="css/slider.css" rel="stylesheet">
+
+</head>
+<body>
+
+	<div id="mySwipe" class="slider">
+		<div class="slider-wrap">
+			<div><img src="01.jpg" /></div>
+			<div><img src="02.jpg" /></div>
+			<div><img src="03.jpg" /></div>
+			<div><img src="04.jpg" /></div>
+			<div><img src="05.jpg" /></div>
+			<div><img src="06.jpg" /></div>
+			<div><img src="07.jpg" /></div>
+			<div><img src="08.jpg" /></div>
+			<div><img src="09.jpg" /></div>
+			<div><img src="10.jpg" /></div>
+		</div>
+	</div>
+
+  <ul class="slider-navigate-wrap" id="navigate">
+		<li class="slider-navigate"></li>
+		<li class="slider-navigate"></li>
+		<li class="slider-navigate"></li>
+		<li class="slider-navigate"></li>
+		<li class="slider-navigate"></li>
+		<li class="slider-navigate"></li>
+	</ul>
+
+	<div id="prev" class="slider-button slider-button-prev"></div>
+	<div id="next" class="slider-button slider-button-next"></div>
+
+	<script src="js/slider.js"></script>
+	<script>
+		// pure JS
+		var element = document.getElementById( 'mySwipe' );
+		var prevBtn = document.getElementById( 'prev' );
+		var nextBtn = document.getElementById( 'next' );
+		var navigate = document.getElementById( 'navigate' );
+
+		window.mySwipe = new Swipe( element, {
+			startSlide: 0,
+			draggable: true,
+			continuous: true,
+			stopPropagation: true,
+			callback: function( index, element ){
+				// 버튼 비활성화 클래스 부여
+				prevBtn.classList.remove( 'slider-button-disabled' );
+				nextBtn.classList.remove( 'slider-button-disabled' );
+				switch( index ){
+					case( 0 ):
+						prevBtn.classList.add( 'slider-button-disabled' );
+					break;
+					case( navigate.children.length - 1 ):
+						nextBtn.classList.add( 'slider-button-disabled' );
+					break;
+				}
+				// 네비게이션 이벤트
+				for( var i = 0; i < navigate.children.length; i++ ){
+					navigate.children[ i ].classList.remove( 'slider-navigate-active' );
+				}
+				navigate.children[ index ].classList.add( 'slider-navigate-active' );
+			}
+		});
+
+		prevBtn.onclick = mySwipe.prev;
+		nextBtn.onclick = mySwipe.next;
+
+		// 네비게이션 인덱스 부여
+		for( var i = 0; i < navigate.children.length; i++ ){
+			navigate.children[ i ].setAttribute( 'data-slider-index', i );
+		}
+
+		// 네비게이션 클릭 이벤트 부여
+		Array.from( navigate.children ).forEach( function( el ){
+			el.addEventListener( 'click', function(){
+				mySwipe.slide( el.getAttribute( 'data-slider-index' ) );
+			}, false );
+		});
+
+		// 네비게이션 첫 번째 요소 활성화
+		navigate.children[ mySwipe.getPos() ].classList.add( 'slider-navigate-active' );
+	</script>
+
+</body>
 </html>
