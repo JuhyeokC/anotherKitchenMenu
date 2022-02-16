@@ -165,6 +165,7 @@ body {
 .spec>table td {
 	border: 1px solid #bbb;
 	padding: 2px 6px;
+	font-famaly: monospace;
 	font-size: 14px;
 }
 
@@ -176,4 +177,21 @@ body {
 .spec>table td {
 	background: #fff;
 	font-weight: normal;
+}
+
+#contact {
+	margin-top: 1rem;
+}
+
+#contact>a {
+	display: flex;
+	flex-flow: row nowrap;
+	place-content: center;
+	align-items: center;
+	border-radius: 0.5rem;
+	background: #0058a8;
+	color: #fff;
+	font-famaly: monospace;
+	font-size: 16px;
+	font-weight: bold;
 }
