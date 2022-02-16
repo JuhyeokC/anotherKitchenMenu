@@ -14,16 +14,15 @@ body {
 	place-content: space-around;
 	align-items: center;
 	width: 100vw;
-	height: 100vh;
-	padding: 1rem;
+	min-height: 100vh;
 	grid-gap: 1rem;
 }
 
 .slider {
 	position: relative;
 	margin: 0 auto;
-	width: calc(100vw - 4rem);
-	height: calc(100vh - 6rem);
+	width: 100vw;
+	height: 100vh;
 	max-width: 100rem;
 	max-height: 80rem;
 	overflow: hidden;
@@ -146,7 +145,7 @@ body {
 
 .img-box {
 	display: flex;
-	flex-flow: row nowrap;
+	flex-flow: column nowrap;
 	place-content: center;
 	align-items: stretch;
 	height: calc(75% - 0.5rem);
