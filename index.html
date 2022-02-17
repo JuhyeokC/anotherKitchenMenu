@@ -60,61 +60,19 @@
 				</div>
 			</div>
 		</div>
-
-		<div id="prev" class="slider-button slider-button-prev"></div>
-		<div id="next" class="slider-button slider-button-next"></div>
 	</div>
 	
 	<script src="js/slider.js"></script>
 	<script>
 		// pure JS
 		var element = document.getElementById( 'mySwipe' );
-		var prevBtn = document.getElementById( 'prev' );
-		var nextBtn = document.getElementById( 'next' );
-		var navigate = document.getElementById( 'navigate' );
 
 		window.mySwipe = new Swipe( element, {
 			startSlide: 0,
 			draggable: true,
 			continuous: true,
-			stopPropagation: true,
-			callback: function( index, element ){
-				// 버튼 비활성화 클래스 부여
-				prevBtn.classList.remove( 'slider-button-disabled' );
-				nextBtn.classList.remove( 'slider-button-disabled' );
-				switch( index ){
-					case( 0 ):
-						prevBtn.classList.add( 'slider-button-disabled' );
-					break;
-					case( navigate.children.length - 1 ):
-						nextBtn.classList.add( 'slider-button-disabled' );
-					break;
-				}
-				// 네비게이션 이벤트
-				for( var i = 0; i < navigate.children.length; i++ ){
-					navigate.children[ i ].classList.remove( 'slider-navigate-active' );
-				}
-				navigate.children[ index ].classList.add( 'slider-navigate-active' );
-			}
+			stopPropagation: true
 		});
-
-		prevBtn.onclick = mySwipe.prev;
-		nextBtn.onclick = mySwipe.next;
-
-		// 네비게이션 인덱스 부여
-		for( var i = 0; i < navigate.children.length; i++ ){
-			navigate.children[ i ].setAttribute( 'data-slider-index', i );
-		}
-
-		// 네비게이션 클릭 이벤트 부여
-		Array.from( navigate.children ).forEach( function( el ){
-			el.addEventListener( 'click', function(){
-				mySwipe.slide( el.getAttribute( 'data-slider-index' ) );
-			}, false );
-		});
-
-		// 네비게이션 첫 번째 요소 활성화
-		navigate.children[ mySwipe.getPos() ].classList.add( 'slider-navigate-active' );
 	</script>
 
 </body>
